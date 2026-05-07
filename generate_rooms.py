@@ -3,6 +3,7 @@ import requests
 from datetime import datetime, timedelta
 import warnings
 import urllib3
+from zoneinfo import ZoneInfo
 
 warnings.filterwarnings(
     "ignore",
@@ -224,7 +225,7 @@ def generate_output(data):
     return {
         "view1": top_rooms,
         "info": info,
-        "updated": datetime.now().isoformat()
+        "updated": datetime.now(ZoneInfo("America/Los_Angeles")).isoformat()
     }
 
 
