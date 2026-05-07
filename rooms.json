@@ -1,0 +1,35 @@
+{
+  "view1": [
+    {
+      "start": "11:35 PM",
+      "duration": "2 hrs"
+    },
+    {
+      "start": "12:00 AM",
+      "duration": "2 hrs"
+    }
+  ],
+  "info": [
+    {
+      "item": "Collab Rooms",
+      "reservation": "2 hrs"
+    },
+    {
+      "item": "Marker Pouches",
+      "reservation": "2 hrs"
+    },
+    {
+      "item": "Laptops",
+      "reservation": "4 hrs"
+    },
+    {
+      "item": "Chargers",
+      "reservation": "4 hrs"
+    },
+    {
+      "item": "Other Items",
+      "reservation": "Until 11:59 PM"
+    }
+  ],
+  "updated": "2026-05-06T18:34:33.204819"
+}

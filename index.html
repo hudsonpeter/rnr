@@ -1,95 +1,163 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000; min-height: 14.0px}
-    span.s1 {font-kerning: none}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Availability</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .loading {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .updated {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 1rem;
+            color: gray;
+        }
+    </style>
 </head>
+
 <body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;html lang="en"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;head&gt;</span></p>
-<p class="p1"><span class="s1">&lt;meta charset="UTF-8"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;title&gt;Room Availability&lt;/title&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;link rel="stylesheet" href="style.css"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;style&gt;</span></p>
-<p class="p1"><span class="s1">.loading {</span></p>
-<p class="p1"><span class="s1">text-align: center;</span></p>
-<p class="p1"><span class="s1">font-size: 1.5rem;</span></p>
-<p class="p1"><span class="s1">margin-top: 2rem;</span></p>
-<p class="p1"><span class="s1">}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">.error {</span></p>
-<p class="p1"><span class="s1">color: red;</span></p>
-<p class="p1"><span class="s1">text-align: center;</span></p>
-<p class="p1"><span class="s1">margin-top: 2rem;</span></p>
-<p class="p1"><span class="s1">}</span></p>
-<p class="p1"><span class="s1">&lt;/style&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
-<p class="p1"><span class="s1">&lt;body&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;header class="banner"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;img src="ITSLogo.jpg" alt="ITS Logo"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/header&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;div class="wrapper"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;div class="container"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;div id="info"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">&lt;div id="view1"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;script&gt;</span></p>
-<p class="p1"><span class="s1">const API_URL = "https://resourcereservations.usc.edu/RandR/Front.aspx?page=getResourceStatesAPI&amp;locationId=1&amp;resourceDomainId=0&amp;resourceTypeId=99";</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">function roundToFiveMinutes(date) {</span></p>
-<p class="p1"><span class="s1">const rounded = new Date(date);</span></p>
-<p class="p1"><span class="s1">const minutes = rounded.getMinutes();</span></p>
-<p class="p1"><span class="s1">const remainder = minutes % 5;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">if (remainder !== 0) {</span></p>
-<p class="p1"><span class="s1">rounded.setMinutes(minutes + (5 - remainder));</span></p>
-<p class="p1"><span class="s1">}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">rounded.setSeconds(0);</span></p>
-<p class="p1"><span class="s1">rounded.setMilliseconds(0);</span></p>
-<p class="p1"><span class="s1">return rounded;</span></p>
-<p class="p1"><span class="s1">}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">function formatTime(date) {</span></p>
-<p class="p1"><span class="s1">return date.toLocaleTimeString([], {</span></p>
-<p class="p1"><span class="s1">hour: '2-digit',</span></p>
-<p class="p1"><span class="s1">minute: '2-digit'</span></p>
-<p class="p1"><span class="s1">});</span></p>
-<p class="p1"><span class="s1">}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">function calculateDuration(start, end) {</span></p>
-<p class="p1"><span class="s1">const diffMs = end - start;</span></p>
-<p class="p1"><span class="s1">const diffMinutes = Math.floor(diffMs / (1000 * 60));</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">if (diffMinutes &lt;= 55) {</span></p>
-<p class="p1"><span class="s1">return null;</span></p>
-<p class="p1"><span class="s1">}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">const cappedMinutes = Math.min(diffMinutes, 120);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">const hours = Math.floor(cappedMinutes / 60);</span></p>
-<p class="p1"><span class="s1">const minutes = cappedMinutes % 60;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">let durationText = "";</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">if (minutes === 0) {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+
+<header class="banner">
+    <img src="ITSLogo.jpg" alt="ITS Logo">
+</header>
+
+<div class="wrapper">
+    <div class="container">
+        <div id="info"></div>
+        <div id="view1"></div>
+    </div>
+</div>
+
+<div id="updated" class="updated"></div>
+
+<script>
+
+const API_URL = "./rooms.json";
+
+async function fetchRoomData() {
+
+    try {
+
+        document.getElementById("view1").innerHTML =
+            '<div class="loading">Loading...</div>';
+
+        const response = await fetch(API_URL);
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch data");
+        }
+
+        const data = await response.json();
+
+        renderAvailabilityTable(data.view1);
+
+        renderInfoTable(data.info);
+
+        renderUpdatedTime(data.updated);
+
+    } catch (error) {
+
+        console.error(error);
+
+        document.getElementById("view1").innerHTML = `
+            <div class="error">
+                Failed to fetch room data.
+            </div>
+        `;
+    }
+}
+
+function renderAvailabilityTable(data) {
+
+    let html = `
+        <table>
+            <thead>
+                <tr>
+                    <th>Next Room At</th>
+                    <th>Duration</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+
+    data.forEach(row => {
+
+        html += `
+            <tr>
+                <td>${row.start}</td>
+                <td>${row.duration}</td>
+            </tr>
+        `;
+    });
+
+    html += `
+            </tbody>
+        </table>
+    `;
+
+    document.getElementById("view1").innerHTML = html;
+}
+
+function renderInfoTable(info) {
+
+    let html = `
+        <table>
+            <thead>
+                <tr>
+                    <th>Items</th>
+                    <th>Reservation Time</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+
+    info.forEach(item => {
+
+        html += `
+            <tr>
+                <td>${item.item}</td>
+                <td>${item.reservation}</td>
+            </tr>
+        `;
+    });
+
+    html += `
+            </tbody>
+        </table>
+    `;
+
+    document.getElementById("info").innerHTML = html;
+}
+
+function renderUpdatedTime(updated) {
+
+    const date = new Date(updated);
+
+    document.getElementById("updated").innerHTML =
+        `Last Updated: ${date.toLocaleString()}`;
+}
+
+fetchRoomData();
+
+setInterval(fetchRoomData, 5000);
+
+</script>
+
 </body>
+
 </html>
